@@ -1,10 +1,51 @@
+version: '3.8'
+
 services:
-  mysql:
-    image: 'mysql:latest'
+  db:
+    image: mysql:8.0
+    volumes:
+      - db-data/var/lib/mysql
     environment:
-      - 'MYSQL_DATABASE=mydatabase'
-      - 'MYSQL_PASSWORD=secret'
-      - 'MYSQL_ROOT_PASSWORD=verysecret'
-      - 'MYSQL_USER=myuser'
+      MYSQL_DATABASE:
+      MYSQL_USER:
+      MYSQL_PASSWORD:
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - api-network
+
+
+  backend:
+    image: sunwoo3856/backend:1
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_USER:
+      DB_PASSWORD:
+      DB_URL:
+    networks:
+      - api-network
     ports:
-      - '3306'
+      - "8081:808"
+
+  frontend:
+    image: sunwoo3856/front:1
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - api-network
+
+
+networks:
+  api-network:
+
+volumes:
+  db-data:
+
