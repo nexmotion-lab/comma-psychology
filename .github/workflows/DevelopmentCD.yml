@@ -15,7 +15,7 @@ env:
 jobs:
   build:
   
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: read
     steps:
@@ -54,9 +54,10 @@ jobs:
       - name : SSH Connection
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.DEPLOY_SERVER_HOST }}
-          username: $${ secrets.DEPLOY_SERVER_USERNAME }}
-          key: ${{ secrets.DEPLOY_SERVER_PRIVATE_KEY }}
+          host: 192.168.0.154 #${{ secrets.DEPLOY_SERVER_HOST }}
+          port: 22
+          username: root #${{ secrets.DEPLOY_SERVER_USERNAME }}
+          password: 780525 #${{ secrets.DEPLOY_SERVER_PASSWORD }}
           script: |
             cd /comma/excuteDockerCompose
             echo "BACKEND_TAG=${{ steps.meta.outputs.tags }}" > .env
