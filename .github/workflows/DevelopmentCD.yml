@@ -8,14 +8,13 @@ on:
     branches: [ "master" ]
 
 env:
-  # github.repository as <account>/<repo>
   IMAGE_NAME: "sunwoo3856/backend"
   REGISTRY: "docker.io"
 
 jobs:
   build:
   
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
@@ -38,8 +37,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      # Build and push Docker image with Buildx (don't push on PR)
-      # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v5.0.0
@@ -54,15 +51,15 @@ jobs:
       - name : SSH Connection
         uses: appleboy/ssh-action@master
         with:
-          host: 192.168.0.154 #${{ secrets.DEPLOY_SERVER_HOST }}
-          port: 22
-          username: root #${{ secrets.DEPLOY_SERVER_USERNAME }}
-          password: 780525 #${{ secrets.DEPLOY_SERVER_PASSWORD }}
+          host: ${{ secrets.DEPLOY_SERVER_HOST }}
+          port: ${{ secrets.DEPLOY_SERVER_PORT }}
+          username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
+          password: ${{ secrets.DEPLOY_SERVER_PASSWORD }}
           script: |
-            cd /comma/excuteDockerCompose
+            cd /root/comma/excuteDockerCompose
             echo "BACKEND_TAG=${{ steps.meta.outputs.tags }}" > .env
-            docker-compose down
-            docker-compose up -d
+            docker-compose pull backend
+            docker-compose up -d --no-deps backend
 
           
           
