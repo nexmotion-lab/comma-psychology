@@ -23,7 +23,7 @@ services:
 
 
   backend:
-    image: sunwoo3856/backend:${BACKEND_TAG}
+    image: sunwoo3856/backend:latest
     depends_on:
       db:
         condition: service_healthy
@@ -40,17 +40,25 @@ services:
       - "8081:8080"
 
   frontend:
-    image: sunwoo3856/front:${FRONTEND_TAG}
+    image: sunwoo3856/front:latest
     depends_on:
       - backend
     ports:
-      - "80:80"
+      - "8888:80"
+    networks:
+      - api-network
+
+  gateway:
+    image: sunwoo3856/gateway:latest
+    ports:
+      - "80:8081"
     networks:
       - api-network
 
 
 networks:
   api-network:
+
 
 volumes:
   db-data:

@@ -33,6 +33,5 @@ COPY --from=jre-build /app/app.jar /app/app.jar
 
 
 CMD ["java", "-jar", "/app/app.jar"]
-EXPOSE 8082
 
 
