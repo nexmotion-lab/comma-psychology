@@ -55,6 +55,18 @@ services:
     networks:
       - api-network
 
+  authentication:
+    image: sunwoo3856/authentication:v1.0.4
+    ports:
+      - "8084:8084"
+    networks:
+      - api-network
+    environment:
+      DB_USER: root
+      DB_PASSWORD: 780525
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_NAME: development
 
 networks:
   api-network:
