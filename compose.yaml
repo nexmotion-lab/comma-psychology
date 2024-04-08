@@ -30,7 +30,7 @@ services:
     environment:
       DB_USER: root
       DB_PASSWORD: 780525
-      DB_HOST: 127.0.0.1
+      DB_HOST: db
       DB_PORT: 3306
       DB_NAME: development
 
@@ -56,7 +56,7 @@ services:
       - api-network
 
   authentication:
-    image: sunwoo3856/authentication:v1.0.4
+    image: sunwoo3856/authentication:latest
     ports:
       - "8084:8084"
     networks:
@@ -64,7 +64,7 @@ services:
     environment:
       DB_USER: root
       DB_PASSWORD: 780525
-      DB_HOST: 127.0.0.1
+      DB_HOST: db
       DB_PORT: 3306
       DB_NAME: development
     depends_on:
