@@ -1,4 +1,4 @@
-package com.coders.comma.psyinfo;
+package com.coders.comma.psy.psyinfo;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

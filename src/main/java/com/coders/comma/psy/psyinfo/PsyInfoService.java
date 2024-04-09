@@ -1,4 +1,4 @@
-package com.coders.comma.psyinfo;
+package com.coders.comma.psy.psyinfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

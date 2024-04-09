@@ -1,4 +1,4 @@
-package com.coders.comma.psyinfo;
+package com.coders.comma.psy.psyinfo;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.coders.comma.psyinfo;
+package com.coders.comma.psy.psyinfo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
