@@ -1,22 +1,31 @@
 FROM eclipse-temurin:17-jdk-alpine as build
 WORKDIR /app
 
-
+RUN apk add --no-cache dos2unix
 COPY gradlew .
+RUN dos2unix gradlew
+RUN chmod +x gradlew
 COPY gradle gradle
 COPY build.gradle .
 COPY settings.gradle .
-
 RUN chmod +x ./gradlew
-RUN ./gradlew build --no-daemon
+
+RUN ./gradlew --version
+RUN ./gradlew dependencies
 
 COPY src src
 RUN ./gradlew build --no-daemon
 
 FROM eclipse-temurin:17-jdk-alpine as jre-build
 COPY --from=build /app/build/libs/*.jar /app/app.jar
+RUN $JAVA_HOME/bin/jdeps \
+    --ignore-missing-deps \
+    --print-module-deps \
+    --class-path "/app/app.jar" \
+    /app/app.jar > /app/deps.info
+
 RUN $JAVA_HOME/bin/jlink \
-    --add-modules java.base,java.compiler,java.datatransfer,java.desktop,java.instrument,java.logging,java.management,java.management.rmi,java.naming,java.net.http,java.prefs,java.rmi,java.scripting,java.se,java.security.jgss,java.security.sasl,java.sql,java.sql.rowset,java.transaction.xa,java.xml,java.xml.crypto,jdk.unsupported,jdk.management,jdk.crypto.ec \
+    --add-modules $(cat /app/deps.info) \
     --strip-debug \
     --no-man-pages \
     --no-header-files \
@@ -25,12 +34,12 @@ RUN $JAVA_HOME/bin/jlink \
 
 FROM alpine:3.15
 ENV JAVA_HOME=/opt/java/openjdk
-ENV PATH "${JAVA_HOME}/bin:${PATH}"
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
 COPY --from=jre-build /javaruntime $JAVA_HOME
 
 WORKDIR /app
 COPY --from=jre-build /app/app.jar /app/app.jar
-
 
 CMD ["java", "-jar", "/app/app.jar"]
 
