@@ -9,8 +9,6 @@ services:
       MYSQL_ROOT_PASSWORD: 780525
       MYSQL_DATABASE: development
       MYSQL_USER: root
-
-
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -25,8 +23,8 @@ services:
   backend:
     image: sunwoo3856/backend:latest
     depends_on:
-      db:
-        condition: service_healthy
+      - config-server
+      - db
     environment:
       DB_USER: root
       DB_PASSWORD: 780525
@@ -43,6 +41,7 @@ services:
     image: sunwoo3856/front:latest
     depends_on:
       - backend
+      - config-server
     ports:
       - "8888:80"
     networks:
@@ -52,6 +51,15 @@ services:
     image: sunwoo3856/gateway
     ports:
       - "80:8081"
+    networks:
+      - api-network
+    depends_on:
+      - config-server
+
+  config-server:
+    image: sunwoo3856/config:latest
+    ports:
+      - "8087:8087"
     networks:
       - api-network
 
@@ -68,8 +76,8 @@ services:
       DB_PORT: 3306
       DB_NAME: development
     depends_on:
-      db:
-        condition: service_healthy
+      - config-server
+      - db
 
 networks:
   api-network:
