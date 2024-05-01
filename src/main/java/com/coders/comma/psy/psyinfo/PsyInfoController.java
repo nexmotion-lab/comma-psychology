@@ -2,11 +2,13 @@ package com.coders.comma.psy.psyinfo;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @Tag(name = "PsyInfo API", description = "상담센터 -> 심리정보 API 입니다.")
 @RestController
 @RequestMapping("/api/v1/psyinfo")
@@ -42,6 +44,12 @@ public class PsyInfoController {
     public PsyInfo updatePsyInfo(@PathVariable int id, @RequestBody PsyInfo psyInfo) {
         psyInfo.setPsyInfoNo(id);
         return psyInfoService.createOrUpdatePsyInfo(psyInfo);
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        log.info("Test");
+        return "test";
     }
 
     @Tag(name = "PsyInfo API")

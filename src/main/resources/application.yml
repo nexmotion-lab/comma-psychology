@@ -2,9 +2,9 @@ spring:
   application:
     name: backend
   profiles:
-    active: dev
+    active: test
   config:
-    import: "configserver:http://config-server:8087"
+    import: "configserver:http://localhost:8087"
   cloud:
     config:
       fail-fast: true
@@ -14,7 +14,6 @@ spring:
         multiplier: 1.5
       request-connect-timeout: 2000
       request-read-timeout: 10000
-server:
-  port: 8086
+
 #encrypt:
 #  key: ${ENCRYPT_KEY}
