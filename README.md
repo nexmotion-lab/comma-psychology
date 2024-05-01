@@ -6,13 +6,13 @@
 jdk : 17 version으로 맞추고 build
 
 ### application.properties 파일을 아래와 같이 수정 후 배포할 때는 커밋 하지말기
-spring.application.name=comma
-spring.datasource.url=jdbc:mysql://192.168.0.154:3306/development
-spring.datasource.username=root
-spring.datasource.password=780525
+spring.application.name=comma<br>
+spring.datasource.url=jdbc:mysql://192.168.0.154:3306/development<br>
+spring.datasource.username=root<br>
+spring.datasource.password=780525<br>
 
 ### 배포용 application.properties
-spring.application.name=comma
-spring.datasource.url=jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
-spring.datasource.username=${DB_USER}
-spring.datasource.password=${DB_PASSWORD}
+spring.application.name=comma<br>
+spring.datasource.url=jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}<br>
+spring.datasource.username=${DB_USER}<br>
+spring.datasource.password=${DB_PASSWORD}<br>
