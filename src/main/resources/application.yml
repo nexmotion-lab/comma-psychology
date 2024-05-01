@@ -2,7 +2,7 @@ spring:
   application:
     name: backend
   profiles:
-    active: test
+    active: dev
   config:
     import: "configserver:http://config-server:8087"
   cloud:
