@@ -31,24 +31,22 @@ services:
       DB_HOST: db
       DB_PORT: 3306
       DB_NAME: development
-
     networks:
       - api-network
     ports:
-      - "8080:8080"
+      - "8086:8086"
 
   frontend:
     image: sunwoo3856/front:latest
     depends_on:
       - backend
-      - config-server
     ports:
       - "8888:80"
     networks:
       - api-network
 
   gateway:
-    image: sunwoo3856/gateway
+    image: sunwoo3856/gateway:latest
     ports:
       - "80:8081"
     networks:
@@ -78,6 +76,15 @@ services:
     depends_on:
       - config-server
       - db
+
+  eureka:
+    image: sunwoo3856/eureka:latest
+    ports:
+      - "8090:8090"
+    networks:
+      - api-network
+    depends_on:
+      - config-server
 
 networks:
   api-network:
