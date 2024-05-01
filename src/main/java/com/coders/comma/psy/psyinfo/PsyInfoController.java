@@ -46,12 +46,6 @@ public class PsyInfoController {
         return psyInfoService.createOrUpdatePsyInfo(psyInfo);
     }
 
-    @GetMapping("/test")
-    public String test() {
-        log.info("Test");
-        return "test";
-    }
-
     @Tag(name = "PsyInfo API")
     @Operation(summary = "심리정보 삭제", description = "심리정보 삭제합니다.")
     @DeleteMapping("/{id}")
