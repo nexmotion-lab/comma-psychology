@@ -12,12 +12,10 @@ public class PsyTest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "psy_test_no")
     private int psy_test_no;
-
-    private String psy_test_title;
-    private String psy_test_contents;
-    private String psy_test_target;
-    private String psy_test_time;
-    private String psy_test_method;
+    private String title;
+    private String content;
+    private String target;
+    private String time;
 
     public void setPsyTestNo(int psy_test_no) { this.psy_test_no = psy_test_no; }
 }
