@@ -18,6 +18,7 @@ public class PsyTestController {
     @Tag(name = "PsyTest API")
     @Operation(summary = "심리검사 리스트 조회", description = "심리검사 리스트를 조회합니다.")
     @GetMapping("/")
+    @CrossOrigin
     public List<PsyTest> getAllPsyTests() {
         return psyTestService.getAllPsyTests();
     }
@@ -25,6 +26,7 @@ public class PsyTestController {
     @Tag(name = "PsyTest API")
     @Operation(summary = "심리검사 조회", description = "심리검사 조회합니다.")
     @GetMapping("/{id}")
+    @CrossOrigin
     public PsyTest getPsyTestById(@PathVariable int id) {
         return psyTestService.getPsyTestById(id).orElse(null);
     }
@@ -32,6 +34,7 @@ public class PsyTestController {
     @Tag(name = "PsyTest API")
     @Operation(summary = "심리검사 생성", description = "심리검사 생성합니다.")
     @PostMapping("/")
+    @CrossOrigin
     public PsyTest createPsyTest(@RequestBody PsyTest psyTest) {
         return psyTestService.createOrUpdatePsyTest(psyTest);
     }
@@ -39,6 +42,7 @@ public class PsyTestController {
     @Tag(name = "PsyTest API")
     @Operation(summary = "심리검사 수정", description = "심리검사 수정합니다.")
     @PutMapping("/{id}")
+    @CrossOrigin
     public PsyTest updatePsyTest(@PathVariable int id, @RequestBody PsyTest psyTest) {
         psyTest.setPsyTestNo(id);
         return psyTestService.createOrUpdatePsyTest(psyTest);
@@ -47,6 +51,7 @@ public class PsyTestController {
     @Tag(name = "PsyTest API")
     @Operation(summary = "심리검사 삭제", description = "심리검사 삭제합니다.")
     @DeleteMapping("/{id}")
+    @CrossOrigin
     public void deletePsyTestById(@PathVariable int id) {
         psyTestService.deletePsyTestById(id);
     }

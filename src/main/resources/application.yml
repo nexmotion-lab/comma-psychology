@@ -2,9 +2,9 @@ spring:
   application:
     name: backend
   profiles:
-    active: dev
+    active: localtest
   config:
-    import: "configserver:http://config-server:8087"
+    import: "configserver:http://localhost:8087"
   cloud:
     config:
       fail-fast: true
