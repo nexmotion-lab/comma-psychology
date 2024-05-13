@@ -13,9 +13,9 @@ public class PsyInfo {
     @Column(name = "psy_info_no")
     private int psy_info_no;
 
-    private String psy_info_title;
-    private String psy_info_contents;
-    private String psy_info_image;
+    private String title;
+    private String contents;
+    private String image;
 
     public void setPsyInfoNo(int psy_info_no) {
         this.psy_info_no = psy_info_no;
