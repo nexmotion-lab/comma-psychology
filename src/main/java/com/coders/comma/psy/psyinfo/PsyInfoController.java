@@ -54,7 +54,6 @@ public class PsyInfoController {
     @Tag(name = "PsyInfo API")
     @Operation(summary = "심리정보 삭제", description = "심리정보 삭제합니다.")
     @DeleteMapping("/{id}")
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     public void deletePsyInfoById(@PathVariable int id) {
         psyInfoService.deletePsyInfoById(id);
     }
