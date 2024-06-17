@@ -14,7 +14,7 @@ public class PsyInfo {
     private int psy_info_no;
 
     private String title;
-    private String contents;
+    private String content;
     private String image;
 
     public void setPsyInfoNo(int psy_info_no) {
