@@ -36,6 +36,22 @@ services:
     ports:
       - "8086:8086"
 
+  diary-service:
+    image: sunwoo3856/diary-service:latest
+    depends_on:
+      - config-server
+      - db
+    environment:
+      DB_USER: root
+      DB_PASSWORD: 780525
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: development
+    networks:
+      - api-network
+    ports:
+      - "8092:8092"
+
   frontend:
     image: sunwoo3856/front:latest
     depends_on:
