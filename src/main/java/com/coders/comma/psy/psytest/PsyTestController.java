@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Tag(name = "PsyTest API", description = "상담센터 -> 심리검사 API 입니다.")
 @RestController
@@ -19,7 +20,7 @@ public class PsyTestController {
     @Operation(summary = "심리검사 리스트 조회", description = "심리검사 리스트를 조회합니다.")
     @GetMapping("/")
     @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-    public List<PsyTest> getAllPsyTests() {
+    public Map<Long, List<PsyTestType.PsyTestCustom>> getAllPsyTests() {
         return psyTestService.getAllPsyTests();
     }
 
