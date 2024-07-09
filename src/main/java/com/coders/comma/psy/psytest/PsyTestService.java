@@ -17,10 +17,10 @@ public class PsyTestService {
     private PsyTestRepository psyTestRepository;
     private PsyTestTypeRepository psyTestTypeRepository;
 
-    public Map<Long, List<PsyTestType.PsyTestCustom>> getAllPsyTests() {
+    public Map<String, List<PsyTestType.PsyTestCustom>> getAllPsyTests() {
         return psyTestTypeRepository.findAllWithPsyTests().stream()
                 .collect(Collectors.toMap(
-                        PsyTestType::getPsyTestTypeNo,
+                        PsyTestType::getTitle,
                         PsyTestType::getPsyTestsWithoutNo
                 ));
     }

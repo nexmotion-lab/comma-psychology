@@ -20,7 +20,7 @@ public class PsyTestController {
     @Operation(summary = "심리검사 리스트 조회", description = "심리검사 리스트를 조회합니다.")
     @GetMapping("/")
     @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-    public Map<Long, List<PsyTestType.PsyTestCustom>> getAllPsyTests() {
+    public Map<String, List<PsyTestType.PsyTestCustom>> getAllPsyTests() {
         return psyTestService.getAllPsyTests();
     }
 
