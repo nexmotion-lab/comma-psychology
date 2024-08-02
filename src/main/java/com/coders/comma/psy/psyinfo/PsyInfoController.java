@@ -20,7 +20,6 @@ public class PsyInfoController {
     @Tag(name = "PsyInfo API")
     @Operation(summary = "심리정보 리스트 조회", description = "심리정보 리스트를 조회합니다.")
     @GetMapping("/")
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     public List<PsyInfo> getAllPsyInfos() {
         return psyInfoService.getAllPsyInfos();
     }
@@ -28,7 +27,6 @@ public class PsyInfoController {
     @Tag(name = "PsyInfo API")
     @Operation(summary = "심리정보 조회", description = "심리정보 조회합니다.")
     @GetMapping("/{id}")
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     public PsyInfo getPsyInfoById(@PathVariable int id) {
         return psyInfoService.getPsyInfoById(id).orElse(null);
     }
@@ -36,7 +34,6 @@ public class PsyInfoController {
     @Tag(name = "PsyInfo API")
     @Operation(summary = "심리정보 생성", description = "심리정보 생성합니다.")
     @PostMapping("/")
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     public PsyInfo createPsyInfo(@RequestBody PsyInfo psyInfo) {
         return psyInfoService.createOrUpdatePsyInfo(psyInfo);
     }
@@ -44,7 +41,6 @@ public class PsyInfoController {
     @Tag(name = "PsyInfo API")
     @Operation(summary = "심리정보 수정", description = "심리정보 수정합니다.")
     @PutMapping("/{id}")
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     public PsyInfo updatePsyInfo(@PathVariable int id, @RequestBody PsyInfo psyInfo) {
         psyInfo.setPsyInfoNo(id);
         return psyInfoService.createOrUpdatePsyInfo(psyInfo);

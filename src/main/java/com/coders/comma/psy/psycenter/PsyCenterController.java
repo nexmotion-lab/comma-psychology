@@ -20,7 +20,6 @@ public class PsyCenterController {
     @Tag(name = "PsyCenter API")
     @Operation(summary = "상담센터 리스트 조회", description = "상담센터 리스트를 조회합니다.")
     @GetMapping("/")
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     public List<PsyCenter> getAllPsyCenters() {
         return psyCenterService.getAllPsyCenters();
     }
@@ -28,7 +27,6 @@ public class PsyCenterController {
     @Tag(name = "PsyCenter API")
     @Operation(summary = "상담센터 조회", description = "상담센터 조회합니다.")
     @GetMapping("/{id}")
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     public PsyCenter getPsyCenterById(@PathVariable int id) {
         return psyCenterService.getPsyCenterById(id).orElse(null);
     }
@@ -36,7 +34,6 @@ public class PsyCenterController {
     @Tag(name = "PsyCenter API")
     @Operation(summary = "상담센터 생성", description = "상담센터 생성합니다.")
     @PostMapping("/")
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     public PsyCenter createPsyCenter(@RequestBody PsyCenter psyCenter) {
         return psyCenterService.createOrUpdatePsyCenter(psyCenter);
     }
@@ -44,7 +41,6 @@ public class PsyCenterController {
     @Tag(name = "PsyCenter API")
     @Operation(summary = "상담센터 수정", description = "상담센터 수정합니다.")
     @PutMapping("/{id}")
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     public PsyCenter updatePsyCenter(@PathVariable int id, @RequestBody PsyCenter psyCenter) {
         psyCenter.setPsyCenterNo(id);
         return psyCenterService.createOrUpdatePsyCenter(psyCenter);
@@ -53,7 +49,6 @@ public class PsyCenterController {
     @Tag(name = "PsyCenter API")
     @Operation(summary = "상담센터 삭제", description = "상담센터 삭제합니다.")
     @DeleteMapping("/{id}")
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     public void deletePsyCenterById(@PathVariable int id) {
         psyCenterService.deletePsyCenterById(id);
     }
