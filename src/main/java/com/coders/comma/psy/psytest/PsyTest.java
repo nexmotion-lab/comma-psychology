@@ -18,9 +18,11 @@ public class PsyTest {
     private String content;
     private String target;
     private String time;
+    private boolean samyook;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "psy_test_type_no")
     private PsyTestType psyTestType;
+
 
     public void setPsyTestNo(int psy_test_no) { this.psy_test_no = psy_test_no; }
 }

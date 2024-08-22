@@ -26,7 +26,9 @@ public class PsyTestType {
 
     public List<PsyTestCustom> getPsyTestsWithoutNo() {
         return psyTests.stream()
-                .map(test -> new PsyTestCustom(test.getPsy_test_no(), test.getTitle(), test.getContent(), test.getTarget(), test.getTime()))
+                .map(test -> new PsyTestCustom(test.getPsy_test_no(),
+                        test.getTitle(), test.getContent(), test.getTarget(),
+                        test.getTime(), test.isSamyook()))
                 .collect(Collectors.toList());
     }
 
@@ -38,7 +40,7 @@ public class PsyTestType {
         private String content;
         private String target;
         private String time;
-
+        private boolean samyook;
 
     }
 }
