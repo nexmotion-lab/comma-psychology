@@ -1,35 +1,68 @@
+server:
+  port: 9004
+  shutdown: graceful
+  tomcat:
+    threads:
+      min-spare: 10
+      max: 200
+    accept-count: 100
+    connection-timeout: 2s
+    keep-alive-timeout: 2s
+
 spring:
   application:
-    name: backend
-  profiles:
-    active: dev
-  config:
-    import: "configserver:http://config-server:8087"
-  cloud:
-    config:
-      fail-fast: true
-      retry:
-        initial-interval: 10000
-        max-attempts: 5
-        multiplier: 1.5
-      request-connect-timeout: 2000
-      request-read-timeout: 10000
+    name: psychology-service
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:changeit1}
+    url: jdbc:mysql://localhost:3306/comma_psychology?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 60000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  flyway:
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    url: ${spring.datasource.url}
+    baselineOnMigrate: true
+    validateOnMigrate: true
+    outOfOrder: true
 
-#encrypt:
-#  key: ${ENCRYPT_KEY}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bindings, configprops, env, flyway, functions, health, heapdump, info, loggers, mappings, prometheus
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+    java:
+      enabled: true
+    os:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
-springdoc:
-  api-docs:
-    path: /api-docs
-    groups.enabled: true
-  swagger-ui:
-    path: /swagger-ui-custom.html
-    enabled: true
-    groups-order: ASC
-    tags-sorter: alpha
-    operations-sorter: alpha
-    display-request-duration: true
-    doc-expansion: none
-  cache:
-    disabled: true
-  model-and-view-allowed: true
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
+

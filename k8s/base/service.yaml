@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: psychology-service
+  labels:
+    app: psychology-service
+spec:
+  selector:
+    app: psychology-service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9004
+  type: ClusterIP
+  

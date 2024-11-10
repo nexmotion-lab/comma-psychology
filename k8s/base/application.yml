@@ -1,0 +1,4 @@
+spring:
+  datasource:
+    url: jdbc:mysql://comma-mysql-psychology:7003/comma_diary?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+
